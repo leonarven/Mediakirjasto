@@ -18,4 +18,7 @@ public class Aani extends Media {
 	
 	public int kesto() { return this.kesto; }
 	
+	public String toString() {
+		return String.format("%1$-8s|%2$-32s|%3$-8s|", "Aani", nimike(), (kesto()+""));
+	}
 }

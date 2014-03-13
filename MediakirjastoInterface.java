@@ -3,6 +3,8 @@ package mediakirjasto;
 public interface MediakirjastoInterface {
 	
 	public abstract void lataaKirjasto(String tiedosto) throws NullPointerException, IllegalArgumentException;
+
+	public abstract void lataaSoittolista(String tiedosto) throws NullPointerException, IllegalArgumentException;
 	
 	public abstract void luoSoittolista(int ylaraja) throws IllegalArgumentException;
 

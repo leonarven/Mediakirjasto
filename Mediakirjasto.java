@@ -1,35 +1,96 @@
 package mediakirjasto;
 
+import fi.uta.csjola.oope.lista.*;
+
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
+import mediakirjasto.mediatyyppi.Media;
+
 public class Mediakirjasto implements MediakirjastoInterface {
 
 	private String kirjastoTiedosto;
+	private String soittolistaTiedosto;
+
+	private Soittolista soittolista = null;
+	
+	private Kirjasto kirjasto = new Kirjasto();
 	
 	public Mediakirjasto() {
-		this(null);
+		this(null, null);
 	}
 
-	public Mediakirjasto(String tiedosto) throws NullPointerException, IllegalArgumentException {
-		if (tiedosto != null) lataaKirjasto(tiedosto);
+	public Mediakirjasto(String kirjastoTiedosto, String soittolistaTiedosto) throws NullPointerException, IllegalArgumentException {
+		if (kirjastoTiedosto != null) {
+			this.kirjastoTiedosto = kirjastoTiedosto;
+			lataaKirjasto(kirjastoTiedosto);
+		}
 
+		if (soittolistaTiedosto != null){
+			this.soittolistaTiedosto = soittolistaTiedosto;
+			lataaKirjasto(soittolistaTiedosto);
+		}
 	}
+
+	/*
+	 * Toteutetaan kivasti kirjastokohtaiset metodit jotka käyttävät interfacen määrittämiä
+	 * */
+
+	public void lataaSoittolista() throws NullPointerException, IllegalArgumentException {
+		this.lataaSoittolista(this.soittolistaTiedosto);
+	}
+
+	public void lataaKirjasto() throws NullPointerException, IllegalArgumentException {
+		this.lataaKirjasto(this.kirjastoTiedosto);
+	}
+
+	public void tallennaSoittolista() throws NullPointerException {
+		this.tallennaSoittolista(this.soittolistaTiedosto);
+	}
+	public void tallennaKirjasto() throws NullPointerException {
+		this.tallennaKirjasto(this.kirjastoTiedosto);
+	}
+
 
 	/*
 	 * Toteutetaan interfacen määrittämät peruskomennot
 	 * */
-	
+	@Override
+	public void lataaSoittolista(String tiedosto) throws NullPointerException, IllegalArgumentException {
+		if (tiedosto == null) throw new NullPointerException("Tiedoston nimi tulee määrittää");
+		
+	}
+
 	@Override
 	public void lataaKirjasto(String tiedosto) throws NullPointerException, IllegalArgumentException {
 		// Tarkistetaan null-Stringien varalta
 		if (tiedosto == null) throw new NullPointerException("Tiedoston nimi tulee määrittää");
 
-		// Tarkistetaan onko tiedosto olemassa
-//		if () throw new IllegalArgumentException();
+		File file = new File(tiedosto);
+		
+		try {
+			
+			Scanner in = new Scanner(file);
+			ArrayList<Media> mediat = new ArrayList<Media>();
+			
+			while(in.hasNextLine()) {
+				Media media = Media.parseLine(in.nextLine());
+				if (media != null) mediat.add(media);
+			}
+			
+			this.kirjasto = new Kirjasto(mediat);
+
+		} catch(FileNotFoundException e) {
+			throw new IllegalArgumentException();
+		}
+		
 	}
 
 	@Override
 	public void luoSoittolista(int ylaraja) throws IllegalArgumentException {
-		// Tarkistetaan onko yläraja oikeellinen
-		if (ylaraja < 0) throw new IllegalArgumentException("Ylärajan tulee olla epänegatiivinen");
+
+		this.soittolista = new Soittolista(ylaraja);
 
 	}
 
@@ -50,6 +111,9 @@ public class Mediakirjasto implements MediakirjastoInterface {
 		// Tarkistetaan onko indeksi oikeellinen
 		if (index < 0) throw new IllegalArgumentException("Indeksin tulee olla epänegatiivinen ");
 
+//		Media = kirjasto.
+		
+//		this.soittolista.lisaa(index, media);
 	}
 
 	@Override
@@ -57,6 +121,7 @@ public class Mediakirjasto implements MediakirjastoInterface {
 		// Tarkistetaan onko indeksi oikeellinen
 		if (index < 0) throw new IllegalArgumentException("Indeksin tulee olla epänegatiivinen ");
 
+		this.soittolista.poista(index);
 	}
 
 	@Override

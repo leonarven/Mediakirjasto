@@ -12,4 +12,13 @@ public enum Mediatyyppi {
 
 	public String toString()
 		{ return this.str; }
+
+	public static Mediatyyppi get(String str) {
+		Mediatyyppi kohde = null;
+		try {
+			kohde = Mediatyyppi.valueOf(str.toUpperCase());
+		} catch(Exception e) {}
+		
+		return kohde;
+	}
 };

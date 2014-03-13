@@ -15,4 +15,7 @@ public class Kuva extends Media {
 	
 	public boolean bittikartta() { return this.bittikartta; }
 	
+	public String toString() {
+		return String.format("%1$-8s|%2$-32s|%3$-8s|", "Kuva", nimike(), (bittikartta()?"true":"false"));
+	}
 }

@@ -3,12 +3,12 @@ package mediakirjasto.mediatyyppi;
 public class Video extends Media {
 	
 	public static enum Genre {
-		DRAAMA("draama"),
-		KAUHU("kauhu"),
-		KOMEDIA("komedia"),
-		KOTI("koti"),
-		TOIMINTA("toiminta"),
-		MUU("muu");
+		DRAAMA("Draama"),
+		KAUHU("Kauhu"),
+		KOMEDIA("Komedia"),
+		KOTI("Koti"),
+		TOIMINTA("Toiminta"),
+		MUU("Muu");
 		
 		String str;
 		
@@ -49,5 +49,8 @@ public class Video extends Media {
 	}
 	public Genre genre() {
 		return this.genre;
+	}
+	public String toString() {
+		return String.format("%1$-8s|%2$-32s|%3$-8s|", "Video", nimike(), genre());
 	}
 }
