@@ -11,44 +11,67 @@ import mediakirjasto.mediatyyppi.Media;
 
 public class Mediakirjasto implements MediakirjastoInterface {
 
+	/** Nime‰‰n kantavien tiedostojen sijainnit */
 	private String kirjastoTiedosto;
 	private String soittolistaTiedosto;
 
+	/** Soittolista jota k‰ytet‰‰n. Saattaa vaihtua ajon aikana */
 	private Soittolista soittolista = null;
 	
+	/** Kirjasto jota k‰ytet‰‰n, ladataan pyydett‰essa sek‰ k‰ynnistett‰ess‰ */
 	private Kirjasto kirjasto = null;
 	
-	public Mediakirjasto() {
-		this(null, null);
-	}
-
+	/**
+	 * Mediakirjaston rakentaja jolle annetaanp parametreina halutun kirjaston sek‰ soittolistan tiedostot
+	 * 
+	 * @param kirjastoTiedosto Halutun kirjaston sijainti
+	 * @param soittolistaTiedosto Halutun soittolistan sijainti
+	 * @throws NullPointerException Heitet‰‰n jos null-arvoinen paramteri
+	 * @throws IllegalArgumentException Heitet‰‰n jos virheellinen tiedoston nimi
+	 */
 	public Mediakirjasto(String kirjastoTiedosto, String soittolistaTiedosto) throws NullPointerException, IllegalArgumentException {
-		if (kirjastoTiedosto != null) {
-			this.kirjastoTiedosto = kirjastoTiedosto;
-			lataaKirjasto(kirjastoTiedosto);
-		}
+		if (kirjastoTiedosto == null || soittolistaTiedosto == null) throw new NullPointerException();
+		
+		this.kirjastoTiedosto = kirjastoTiedosto;
+		lataaKirjasto(kirjastoTiedosto);
 
-		if (soittolistaTiedosto != null){
-			this.soittolistaTiedosto = soittolistaTiedosto;
-			lataaSoittolista(soittolistaTiedosto);
-		}
+		this.soittolistaTiedosto = soittolistaTiedosto;
+		lataaSoittolista(soittolistaTiedosto);
 	}
 
 	/*
 	 * Toteutetaan kivasti kirjastokohtaiset metodit jotka k‰ytt‰v‰t interfacen m‰‰ritt‰mi‰
 	 * */
 
+	/**
+	 * 
+	 * @throws NullPointerException
+	 * @throws IllegalArgumentException
+	 */
 	public void lataaSoittolista() throws NullPointerException, IllegalArgumentException {
 		this.lataaSoittolista(this.soittolistaTiedosto);
 	}
 
+	/**
+	 * 
+	 * @throws NullPointerException
+	 * @throws IllegalArgumentException
+	 */
 	public void lataaKirjasto() throws NullPointerException, IllegalArgumentException {
 		this.lataaKirjasto(this.kirjastoTiedosto);
 	}
 
+	/**
+	 * 
+	 * @throws NullPointerException
+	 */
 	public void tallennaSoittolista() throws NullPointerException {
 		this.tallennaSoittolista(this.soittolistaTiedosto);
 	}
+	/**
+	 * 
+	 * @throws NullPointerException
+	 */
 	public void tallennaKirjasto() throws NullPointerException {
 		this.tallennaKirjasto(this.kirjastoTiedosto);
 	}
@@ -57,6 +80,7 @@ public class Mediakirjasto implements MediakirjastoInterface {
 	/*
 	 * Toteutetaan interfacen m‰‰ritt‰m‰t peruskomennot
 	 * */
+
 	@Override
 	public void lataaSoittolista(String tiedosto) throws NullPointerException, IllegalArgumentException {
 		// Tarkistetaan null-Stringien varalta

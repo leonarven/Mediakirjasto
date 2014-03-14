@@ -4,13 +4,21 @@ import java.util.ArrayList;
 
 import mediakirjasto.mediatyyppi.Media;
 
+/**
+ * Kirjasto-luokka, joka periytet‰‰n Lista -luokasta toteutumaan linkitettyn‰ listana
+ * 
+ * @author Miro Nieminen (leonarven+oope@gmail.com), op 98297
+ */
 public class Kirjasto extends Lista {
 	
-	public Kirjasto(ArrayList<Media> mediat) {
-		for(Media media : mediat) {
+	/**
+	 * Rakentaja Kirjasto-luokalle.
+	 * 
+	 * @param mediat ArrayList medioista joilla halutaan kirjasto alustaa
+	 * @throws NullPointerException jos parametri on null
+	 */
+	public Kirjasto(ArrayList<Media> mediat) throws NullPointerException {
+		for(Media media : mediat)
 			this.lisaaAlkuun(media);
-		}
-		Oope2014HT.DEBUG("koko:"+this.koko());
-		Oope2014HT.DEBUG_STACK();
 	}
 }
