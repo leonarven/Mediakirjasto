@@ -6,6 +6,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.FileNotFoundException;
+
 import mediakirjasto.mediatyyppi.Media;
 
 public class Mediakirjasto implements MediakirjastoInterface {
@@ -15,7 +16,7 @@ public class Mediakirjasto implements MediakirjastoInterface {
 
 	private Soittolista soittolista = null;
 	
-	private Kirjasto kirjasto = new Kirjasto();
+	private Kirjasto kirjasto = null;
 	
 	public Mediakirjasto() {
 		this(null, null);
@@ -29,12 +30,12 @@ public class Mediakirjasto implements MediakirjastoInterface {
 
 		if (soittolistaTiedosto != null){
 			this.soittolistaTiedosto = soittolistaTiedosto;
-			lataaKirjasto(soittolistaTiedosto);
+			lataaSoittolista(soittolistaTiedosto);
 		}
 	}
 
 	/*
-	 * Toteutetaan kivasti kirjastokohtaiset metodit jotka k√§ytt√§v√§t interfacen m√§√§ritt√§mi√§
+	 * Toteutetaan kivasti kirjastokohtaiset metodit jotka k‰ytt‰v‰t interfacen m‰‰ritt‰mi‰
 	 * */
 
 	public void lataaSoittolista() throws NullPointerException, IllegalArgumentException {
@@ -54,24 +55,53 @@ public class Mediakirjasto implements MediakirjastoInterface {
 
 
 	/*
-	 * Toteutetaan interfacen m√§√§ritt√§m√§t peruskomennot
+	 * Toteutetaan interfacen m‰‰ritt‰m‰t peruskomennot
 	 * */
 	@Override
 	public void lataaSoittolista(String tiedosto) throws NullPointerException, IllegalArgumentException {
-		if (tiedosto == null) throw new NullPointerException("Tiedoston nimi tulee m√§√§ritt√§√§");
+		// Tarkistetaan null-Stringien varalta
+		if (tiedosto == null) throw new NullPointerException("Tiedoston nimi tulee m‰‰ritt‰‰");
+
+		File file = new File(tiedosto);
 		
+		Scanner in = null;
+
+		try {
+			
+			in = new Scanner(file);
+
+			String ylaraja_str = in.nextLine().split("[|]")[0].trim();
+			int ylaraja = Integer.parseInt(ylaraja_str);
+
+			this.soittolista = new Soittolista(ylaraja);
+			
+			while(in.hasNextLine()) {
+				Media media = Media.parseLine(in.nextLine());
+				if (media != null) this.soittolista.lisaaLoppuun(media);
+			}
+
+		} catch(FileNotFoundException e) {
+			
+			this.soittolista = null;
+			
+			throw new IllegalArgumentException();
+		} finally {
+			if (in != null) in.close();
+		}
 	}
 
 	@Override
 	public void lataaKirjasto(String tiedosto) throws NullPointerException, IllegalArgumentException {
 		// Tarkistetaan null-Stringien varalta
-		if (tiedosto == null) throw new NullPointerException("Tiedoston nimi tulee m√§√§ritt√§√§");
+		if (tiedosto == null) throw new NullPointerException("Tiedoston nimi tulee m‰‰ritt‰‰");
 
 		File file = new File(tiedosto);
 		
+		Scanner in = null;
+		
 		try {
 			
-			Scanner in = new Scanner(file);
+			in = new Scanner(file);
 			ArrayList<Media> mediat = new ArrayList<Media>();
 			
 			while(in.hasNextLine()) {
@@ -83,8 +113,9 @@ public class Mediakirjasto implements MediakirjastoInterface {
 
 		} catch(FileNotFoundException e) {
 			throw new IllegalArgumentException();
+		} finally {
+			if (in != null) in.close();
 		}
-		
 	}
 
 	@Override
@@ -96,20 +127,25 @@ public class Mediakirjasto implements MediakirjastoInterface {
 
 	@Override
 	public int tulostaKirjasto() {
-		// TODO Auto-generated method stub
+		for(int i = 0; i < kirjasto.koko(); i++)
+			System.out.println(String.format("%1$-3s|%2$s", i, kirjasto.alkio(i)));
+			
 		return 0;
 	}
 
 	@Override
 	public int tulostaSoittolista() {
-		// TODO Auto-generated method stub
+		System.out.println((soittolista.koko())+" / "+(soittolista.ylaraja()));
+		for(int i = 0; i < soittolista.koko(); i++)
+			System.out.println(String.format("%1$-3s|%2$s", i, soittolista.alkio(i)));
+			
 		return 0;
 	}
 
 	@Override
 	public void lisaaMedia(int index) throws IllegalArgumentException {
 		// Tarkistetaan onko indeksi oikeellinen
-		if (index < 0) throw new IllegalArgumentException("Indeksin tulee olla ep√§negatiivinen ");
+		if (index < 0) throw new IllegalArgumentException("Indeksin tulee olla ep‰negatiivinen ");
 
 //		Media = kirjasto.
 		
@@ -119,7 +155,7 @@ public class Mediakirjasto implements MediakirjastoInterface {
 	@Override
 	public void poistaMedia(int index) throws IllegalArgumentException {
 		// Tarkistetaan onko indeksi oikeellinen
-		if (index < 0) throw new IllegalArgumentException("Indeksin tulee olla ep√§negatiivinen ");
+		if (index < 0) throw new IllegalArgumentException("Indeksin tulee olla ep‰negatiivinen ");
 
 		this.soittolista.poista(index);
 	}
@@ -139,14 +175,14 @@ public class Mediakirjasto implements MediakirjastoInterface {
 	@Override
 	public void tallennaSoittolista(String tiedosto) throws NullPointerException {
 		// Tarkistetaan null-Stringien varalta
-		if (tiedosto == null) throw new NullPointerException("Tiedoston nimi tulee m√§√§ritt√§√§");
+		if (tiedosto == null) throw new NullPointerException("Tiedoston nimi tulee m‰‰ritt‰‰");
 
 	}
 
 	@Override
 	public void tallennaKirjasto(String tiedosto) throws NullPointerException {
 		// Tarkistetaan null-Stringien varalta
-		if (tiedosto == null) throw new NullPointerException("Tiedoston nimi tulee m√§√§ritt√§√§");
+		if (tiedosto == null) throw new NullPointerException("Tiedoston nimi tulee m‰‰ritt‰‰");
 
 	}
 

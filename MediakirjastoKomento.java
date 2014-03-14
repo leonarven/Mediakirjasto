@@ -36,12 +36,13 @@ public enum MediakirjastoKomento {
 	public String toString()   { return this.komento; }
 	
 	public static MediakirjastoKomento tunnistaKomento(String str) {
-		for(MediakirjastoKomento komento : MediakirjastoKomento.values())
+
+		for(MediakirjastoKomento komento : MediakirjastoKomento.values()) {
 			try {
 				if (komento.toString().equalsIgnoreCase(str.substring(0, komento.toString().length())))
 					return komento;
 			} catch(Exception e) { continue; }
-		
+		}
 		return null;
 	}
 }

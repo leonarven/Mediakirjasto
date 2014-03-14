@@ -1,10 +1,24 @@
 package mediakirjasto;
 
-import h4.In;
+import fi.uta.csjola.oope.In;
 import mediakirjasto.mediatyyppi.*;
 
 public class Oope2014HT {
 
+	public static boolean DEBUG = true;
+
+	public static void DEBUG(String str) {
+		if (!Oope2014HT.DEBUG) return;
+		System.out.println(str);
+	}
+	
+	public static void DEBUG_STACK() {
+		if (!Oope2014HT.DEBUG) return;
+		try {
+			throw new Exception();
+		} catch(Exception e) { e.printStackTrace(); }
+	}
+	
 	public static void main(String ... args) {
 		
 		System.out.println("***************");
@@ -22,14 +36,13 @@ public class Oope2014HT {
 			do {
 				
 				komento = getKomento("Kirjoita komento:");
-
+				
 				if (komento == null) {
 					System.out.println("Virhe!");
 					continue;
 				}
 				
-				// DEBUG
-				if (komento.argc()) System.out.println("Parametri "+komento.argv());
+				Oope2014HT.DEBUG("Annettu komento "+komento+"("+komento.argv()+")");
 				
 				switch(komento) {
 					case TULOSTAKIRJASTO:
