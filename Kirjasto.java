@@ -19,6 +19,6 @@ public class Kirjasto extends Lista {
 	 */
 	public Kirjasto(ArrayList<Media> mediat) throws NullPointerException {
 		for(Media media : mediat)
-			this.lisaaAlkuun(media);
+			this.lisaaLoppuun(media);
 	}
 }

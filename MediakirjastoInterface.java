@@ -1,5 +1,10 @@
 package mediakirjasto;
 
+/**
+ * Interface jolla rakennetaan mediakirjaston toiminnallisuus
+ * 
+ * @author Miro Nieminen (leonarven+oope@gmail.com), op 98297
+ */
 public interface MediakirjastoInterface {
 	
 	/**
@@ -19,9 +24,9 @@ public interface MediakirjastoInterface {
 	public abstract void lataaSoittolista(String tiedosto) throws NullPointerException, IllegalArgumentException;
 	
 	/**
-	 * 
-	 * @param ylaraja
-	 * @throws IllegalArgumentException
+	 * Ottaa käyttöön uuden, halutun kokoisen soittolistan
+	 * @param ylaraja Haluttu koon yläraja
+	 * @throws IllegalArgumentException Jos parametri on virheellinen
 	 */
 	public abstract void luoSoittolista(int ylaraja) throws IllegalArgumentException;
 
@@ -59,7 +64,7 @@ public interface MediakirjastoInterface {
 	/**
 	 * 
 	 */
-	public abstract void lajitteleSoittolista();
+	public abstract void lajitteleSoittolista(String ord) throws IllegalArgumentException;
 
 	/**
 	 * 

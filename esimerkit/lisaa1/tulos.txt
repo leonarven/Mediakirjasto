@@ -1,0 +1,27 @@
+***************
+* SOITTOLISTA *
+***************
+Kirjoita komento:
+0  |Aani    |NC&BS: We No Who U R          |4       |
+1  |Aani    |NC&BS: More News from Nowhere |8       |
+2  |Aani    |NC&BS: There She Goes, My...  |5       |
+3  |Aani    |NC&BS: Bring It On            |6       |
+4  |Aani    |NC&BS: Fifteen Feet of Pure...|6       |
+Kirjoita komento:
+1 / 3
+0  |Aani    |NC&BS: Bring It On            |6       |
+Kirjoita komento:
+Kirjoita komento:
+Kirjoita komento:
+3 / 3
+0  |Aani    |NC&BS: Bring It On            |6       |
+1  |Aani    |NC&BS: We No Who U R          |4       |
+2  |Aani    |NC&BS: Fifteen Feet of Pure...|6       |
+Kirjoita komento:
+0  |Aani    |NC&BS: We No Who U R          |4       |
+1  |Aani    |NC&BS: More News from Nowhere |8       |
+2  |Aani    |NC&BS: There She Goes, My...  |5       |
+3  |Aani    |NC&BS: Bring It On            |6       |
+4  |Aani    |NC&BS: Fifteen Feet of Pure...|6       |
+Kirjoita komento:
+Ohjelma lopetettu.

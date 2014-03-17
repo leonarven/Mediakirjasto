@@ -1,22 +1,31 @@
 package mediakirjasto;
 
 import fi.uta.csjola.oope.In;
-import mediakirjasto.mediatyyppi.*;
 
+/**
+ * 
+ * @author Miro Nieminen (leonarven+oope@gmail.com), op 98297
+ */
 public class Oope2014HT {
 
 	public static boolean DEBUG = true;
 
 	public static void DEBUG(String str) {
 		if (!Oope2014HT.DEBUG) return;
-		System.out.println(str);
+		System.out.println("DEBUG :: "+str);
 	}
-	
+
+	public static void DEBUG(Exception e) {
+		if (!Oope2014HT.DEBUG) return;
+		System.out.println("DEBUG :: ");
+		e.printStackTrace();
+	}
+
 	public static void DEBUG_STACK() {
 		if (!Oope2014HT.DEBUG) return;
-		try {
-			throw new Exception();
-		} catch(Exception e) { e.printStackTrace(); }
+		System.out.print("DEBUG :: ");
+		try { throw new Exception();
+		} catch(Exception e) { DEBUG(e); }
 	}
 	
 	public static void main(String ... args) {
@@ -37,49 +46,56 @@ public class Oope2014HT {
 				
 				komento = getKomento("Kirjoita komento:");
 				
-				if (komento == null) {
+				
+				try {
+
+					if (komento == null) throw new NullPointerException();
+					
+					Oope2014HT.DEBUG("Annettu komento "+komento+"("+komento.argv()+")");
+					
+					switch(komento) {
+						case TULOSTAKIRJASTO: // DONE
+							mediakirjasto.tulostaKirjasto();
+							break;
+						case LAJITTELEKIRJASTO:
+							mediakirjasto.lajitteleSoittolista(komento.argv());
+							break;
+						case TULOSTASOITTOLISTA: // DONE
+							mediakirjasto.tulostaSoittolista();
+							break;
+						case LUOSOITTOLISTA: // DONE
+							mediakirjasto.luoSoittolista(Integer.parseInt(komento.argv()));
+							break;
+						case TAYTASOITTOLISTA:
+							mediakirjasto.taytaMedialla();
+							break;
+						case TALLENNA:
+							mediakirjasto.tallennaKirjasto();
+							mediakirjasto.tallennaSoittolista();
+							break;
+						case LATAA: // DONE
+							mediakirjasto.lataaKirjasto();
+							mediakirjasto.lataaSoittolista();
+							break;
+						case LOPETA: // DONE
+							jatka = false;
+							break;
+						case LISAAMEDIA:
+							mediakirjasto.lisaaMedia(Integer.parseInt(komento.argv()));
+							break;
+						case POISTAMEDIA: // DONE
+							mediakirjasto.poistaMedia(Integer.parseInt(komento.argv()));
+							break;
+						default:
+							throw new NullPointerException();
+					}
+					
+				} catch(Exception e) {
 					System.out.println("Virhe!");
+					DEBUG(e);
 					continue;
 				}
-				
-				Oope2014HT.DEBUG("Annettu komento "+komento+"("+komento.argv()+")");
-				
-				switch(komento) {
-					case TULOSTAKIRJASTO:
-						mediakirjasto.tulostaKirjasto();
-						break;
-					case LAJITTELEKIRJASTO:
-						break;
-					case TULOSTASOITTOLISTA:
-						mediakirjasto.tulostaSoittolista();
-						break;
-					case LUOSOITTOLISTA:
-						mediakirjasto.luoSoittolista(komento.argv());
-						break;
-					case TAYTASOITTOLISTA:
-						mediakirjasto.taytaMedialla();
-						break;
-					case TALLENNA:
-						mediakirjasto.tallennaKirjasto();
-						mediakirjasto.tallennaSoittolista();
-						break;
-					case LATAA:
-						mediakirjasto.lataaKirjasto();
-						mediakirjasto.lataaSoittolista();
-						break;
-					case LOPETA:
-						jatka = false;
-						break;
-					case LISAAMEDIA:
-						mediakirjasto.lisaaMedia(komento.argv());
-						break;
-					case POISTAMEDIA:
-						mediakirjasto.poistaMedia(komento.argv());
-						break;
-					default:
-						System.out.println("Virhe!");
-				}
-				
+
 			} while(jatka);
 			
 			System.out.println("Ohjelma lopetettu.");
@@ -99,10 +115,8 @@ public class Oope2014HT {
 		if (cmd == null) return null;
 
 		try {
-			if (cmd.argc()) {
-				String argv_str = komento.substring(cmd.toString().length()+1);
-				cmd.argv(Integer.parseInt(argv_str));
-			}
+			if (cmd.argc())
+				cmd.argv(komento.substring(cmd.toString().length()+1));
 		} catch(Exception e) {
 			return null;
 		}

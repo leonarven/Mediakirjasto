@@ -1,0 +1,73 @@
+***************
+* SOITTOLISTA *
+***************
+Kirjoita komento: lataa
+Kirjoita komento: kirjasto
+0  |Aani    |Knife - Heartbeats            |4       |
+1  |Kuva    |feelsbadman.jpg               |true    |
+2  |Aani    |Pixies - Blue Eyed Hexe       |3       |
+3  |Video   |Drive                         |draama  |
+Kirjoita komento: soittolista
+2 / 2
+0  |Aani    |Knife - Heartbeats            |4       |
+1  |Aani    |Pixies - Blue Eyed Hexe       |3       |
+Kirjoita komento: luo 0
+Virhe!
+Kirjoita komento: luo 5
+Virhe!
+Kirjoita komento: luo 4
+Kirjoita komento: soittolista
+0 / 4
+Kirjoita komento:
+Kirjoita komento:
+1 / 4
+0  |Video   |Drive                         |draama  |
+Kirjoita komento:
+0  |Aani    |Knife - Heartbeats            |4       |
+1  |Kuva    |feelsbadman.jpg               |true    |
+2  |Aani    |Pixies - Blue Eyed Hexe       |3       |
+3  |Video   |Drive                         |draama  |
+Kirjoita komento:
+Virhe!
+Kirjoita komento:
+Kirjoita komento:
+2 / 4
+0  |Video   |Drive                         |draama  |
+1  |Kuva    |feelsbadman.jpg               |true    |
+Kirjoita komento:
+Virhe!
+Kirjoita komento:
+Kirjoita komento:
+1 / 4
+0  |Video   |Drive                         |draama  |
+Kirjoita komento:
+Kirjoita komento:
+4 / 4
+0  |Video   |Drive                         |draama  |
+1  |Aani    |Knife - Heartbeats            |4       |
+2  |Kuva    |feelsbadman.jpg               |true    |
+3  |Aani    |Pixies - Blue Eyed Hexe       |3       |
+Kirjoita komento:
+Kirjoita komento:
+Kirjoita komento:
+Virhe!
+Kirjoita komento:
+3 / 4
+0  |Kuva    |feelsbadman.jpg               |true    |
+1  |Aani    |Pixies - Blue Eyed Hexe       |3       |
+2  |Aani    |Knife - Heartbeats            |4       |
+Kirjoita komento:
+Kirjoita komento:
+0  |Video   |Drive                         |draama  |
+1  |Kuva    |feelsbadman.jpg               |true    |
+2  |Aani    |Knife - Heartbeats            |4       |
+3  |Aani    |Pixies - Blue Eyed Hexe       |3       |
+Kirjoita komento:
+Kirjoita komento:
+0  |Aani    |Pixies - Blue Eyed Hexe       |3       |
+1  |Aani    |Knife - Heartbeats            |4       |
+2  |Kuva    |feelsbadman.jpg               |true    |
+3  |Video   |Drive                         |draama  |
+Kirjoita komento:
+Kirjoita komento:
+Ohjelma lopetettu.

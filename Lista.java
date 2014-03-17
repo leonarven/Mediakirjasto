@@ -64,4 +64,8 @@ public class Lista extends LinkitettyLista {
 			System.out.println(this.alkio(i));
 	}
 	
+	public void aseta(Object alkio, int i) {
+		this.korvaa(i, alkio);
+	}
+	
 }

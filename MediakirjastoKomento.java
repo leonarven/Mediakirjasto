@@ -3,7 +3,7 @@ package mediakirjasto;
 public enum MediakirjastoKomento {
 	
 	TULOSTAKIRJASTO("kirjasto"),
-	LAJITTELEKIRJASTO("lajittele"),
+	LAJITTELEKIRJASTO("lajittele", true),
 
 	TULOSTASOITTOLISTA("soittolista"),
 	LUOSOITTOLISTA("luo", true),
@@ -17,7 +17,7 @@ public enum MediakirjastoKomento {
 	POISTAMEDIA("poista", true);
 
 	private boolean argc = false;
-	private int argv = -1;
+	private String argv = null;
 	private String komento;
 
 	private MediakirjastoKomento(String komento) {
@@ -28,12 +28,12 @@ public enum MediakirjastoKomento {
 		this.argc    = argc;
 	}
 	
-	public void argv(int argv) { this.argv = argv; }
-	public int argv()          { return this.argv; }
+	public void argv(String argv) { this.argv = argv; }
+	public String argv()          { return this.argv; }
 
-	public boolean argc()      { return this.argc; }
+	public boolean argc()         { return this.argc; }
 
-	public String toString()   { return this.komento; }
+	public String toString()      { return this.komento; }
 	
 	public static MediakirjastoKomento tunnistaKomento(String str) {
 

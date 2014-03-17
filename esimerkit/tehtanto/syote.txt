@@ -1,0 +1,28 @@
+lataa
+kirjasto
+soittolista
+luo 0
+luo 5
+luo 4
+soittolista
+lisaa 3
+soittolista
+kirjasto
+lisaa 3
+lisaa 1
+soittolista
+poista 2
+poista 1
+soittolista
+tayta
+soittolista
+poista 0
+poista 0
+tayta
+soittolista
+lajittele nouseva
+kirjasto
+lajittele laskeva
+kirjasto
+tallenna
+lopeta

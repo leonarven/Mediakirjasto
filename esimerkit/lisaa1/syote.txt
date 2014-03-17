@@ -1,0 +1,7 @@
+kirjasto
+soittolista
+lisaa 0
+lisaa 4
+soittolista
+kirjasto
+lopeta
