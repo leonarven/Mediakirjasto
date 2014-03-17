@@ -13,8 +13,9 @@ public abstract class Media implements Comparable<Media>  {
 	/**
 	 * @param nimike Haluttu median nimike
 	 * @throws NullPointerException Jos nimike on null
+	 * @throws IllegalArgumentException Jos nimike on ep‰validi(tyhj‰) merkkijono
 	 */
-	public Media(String nimike) throws NullPointerException {
+	public Media(String nimike) throws NullPointerException, IllegalArgumentException {
 		/** K‰ytet‰‰n attribuutin setteri‰ oikeellisuuden varmistamiseksi */
 		nimike(nimike);
 	}
@@ -24,10 +25,13 @@ public abstract class Media implements Comparable<Media>  {
 	 * 
 	 * @param nimike Haluttu nimike
 	 * @throws NullPointerException Jos nimike on null
+	 * @throws IllegalArgumentException Jos nimike on ep‰validi(tyhj‰) merkkijono
 	 */
-	public void nimike(String nimike) throws NullPointerException {
+	public void nimike(String nimike) throws NullPointerException, IllegalArgumentException {
 		/** Joss nimike on null, heitet‰‰n NullPointerException */
 		if (nimike == null) throw new NullPointerException();
+		/** Jos tyhj‰ merkkijono nimikkeen‰ */
+		if (nimike.trim().length() == 0) throw new IllegalArgumentException();
 		this.nimike = nimike;
 	}
 
@@ -71,6 +75,7 @@ public abstract class Media implements Comparable<Media>  {
 	 */
 	@Override public int compareTo(Media toinen) {
 		/** K‰ytet‰‰n String-luokan compareTo-metodia vertailemaan nimikkeit‰ */
-		 return this.nimike().compareTo(toinen.nimike());
+		int ordn = this.nimike().compareTo(toinen.nimike());
+		return ordn == 0 ? 0 : (ordn < 0 ? -1 : 1);
 	}
 }

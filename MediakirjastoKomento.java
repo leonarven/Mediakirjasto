@@ -1,5 +1,9 @@
 package mediakirjasto;
 
+/**
+ * 
+ * @author Miro Nieminen (leonarven+oope@gmail.com), op 98297
+ */
 public enum MediakirjastoKomento {
 	
 	TULOSTAKIRJASTO("kirjasto"),
@@ -15,26 +19,57 @@ public enum MediakirjastoKomento {
 
 	LISAAMEDIA("lisaa", true),
 	POISTAMEDIA("poista", true);
+	
 
+	/** Tieto vaatiiko komento parametreja */
 	private boolean argc = false;
+
+	/** Parametri */
 	private String argv = null;
+
+	/** String-esitys toteltavasta komennosta */
 	private String komento;
 
+	/**
+	 * Enumin rakentaja, parametrinä toteltava komento
+	 * @param komento Toteltava komento
+	 */
 	private MediakirjastoKomento(String komento) {
 		this(komento, false);
 	}
+
+	/**
+	 * Enumin rakentaja, parametrinä toteltava komento sekäö tieto vaaditaanko parametreja
+	 * @param komento Toteltava komento
+	 * @param argc Boolen, onko käytössä parametrejä
+	 */
 	private MediakirjastoKomento(String komento, boolean argc) {
 		this.komento = komento;
 		this.argc    = argc;
 	}
 	
+	/** Setter argv-attribuutille
+	 * @param argv Komennolle annettu parametri
+	 */
 	public void argv(String argv) { this.argv = argv; }
+
+	/** Getter argv-attribuutille
+	 */
 	public String argv()          { return this.argv; }
 
+	/** Gatter argc-attribuutille
+	 */
 	public boolean argc()         { return this.argc; }
 
+	/** Komento String:ksi
+	 */
 	public String toString()      { return this.komento; }
 	
+	/**
+	 * Staattinen metodi jolla havaitaan haluttu MediakirjastoKomento annetun komennon perusteella
+	 * @param str Annettu komento
+	 * @return null jos epävalidi MediakirjastoKomento, muulloin Enum-arvo
+	 */
 	public static MediakirjastoKomento tunnistaKomento(String str) {
 
 		for(MediakirjastoKomento komento : MediakirjastoKomento.values()) {

@@ -3,8 +3,10 @@ package mediakirjasto;
 import fi.uta.csjola.oope.In;
 
 /**
+ * Ajoluokka, sisältää arvot debuggauksesta, käsittelee käyttäjien syötteet ja komentelee Mediakirjasto:a
  * 
  * @author Miro Nieminen (leonarven+oope@gmail.com), op 98297
+ * @version 140317
  */
 public class Oope2014HT {
 
@@ -25,7 +27,7 @@ public class Oope2014HT {
 		if (!Oope2014HT.DEBUG) return;
 		System.out.print("DEBUG :: ");
 		try { throw new Exception();
-		} catch(Exception e) { DEBUG(e); }
+		} catch(Exception e) { Oope2014HT.DEBUG(e); }
 	}
 	
 	public static void main(String ... args) {
@@ -58,7 +60,7 @@ public class Oope2014HT {
 							mediakirjasto.tulostaKirjasto();
 							break;
 						case LAJITTELEKIRJASTO:
-							mediakirjasto.lajitteleSoittolista(komento.argv());
+							mediakirjasto.lajitteleKirjasto(komento.argv());
 							break;
 						case TULOSTASOITTOLISTA: // DONE
 							mediakirjasto.tulostaSoittolista();

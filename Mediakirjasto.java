@@ -11,6 +11,7 @@ import mediakirjasto.mediatyyppi.Media;
  * Mediakirjaston ydinluokka
  * 
  * @author Miro Nieminen (leonarven+oope@gmail.com), op 98297
+ * @version 140317
  */
 public class Mediakirjasto implements MediakirjastoInterface {
 
@@ -174,14 +175,17 @@ public class Mediakirjasto implements MediakirjastoInterface {
 	@Override
 	public void lisaaMedia(int index) throws IllegalArgumentException {
 		// Tarkistetaan onko indeksi oikeellinen
-		if (index < 0 || this.kirjasto.koko() >= index) throw new IllegalArgumentException("Indeksin tulee olla epänegatiivinen ");
+		if (index < 0) throw new IllegalArgumentException("Indeksin tulee olla epänegatiivinen");
+		if (index >= this.kirjasto.koko()) throw new IllegalArgumentException("Indeksin tulee olla kirjaston koon rajoissa");
 
 		if (this.soittolista.koko() < this.soittolista.ylaraja()) {
 			
 			Object alkio = this.kirjasto.alkio(index);
 			
-			this.soittolista.lisaaLoppuun((Media)alkio);
-		}
+			if (this.soittolista.etsi(alkio) == null) {
+				this.soittolista.lisaaLoppuun((Media)alkio);
+			} else throw new IllegalArgumentException("Media on jo soittolistalla");
+		} else throw new IllegalArgumentException("Soittolista on jo täynnä");
 	}
 
 	@Override
@@ -195,26 +199,38 @@ public class Mediakirjasto implements MediakirjastoInterface {
 
 	@Override
 	public void taytaMedialla() {
-		// TODO Auto-generated method stub
-
+		/** Läpikäydään kaikki kirjaston mediat ja yritetään(HUOM!) lisätä soittolistalle */
+		for(int i = 0; i < this.kirjasto.koko(); i++)
+			try {
+				/** Yritetään lisätä. Jos virhe (media jo listalla, mennään yli rajojen) niin catch nappaa ja jatkaa */
+				this.lisaaMedia(i);
+			} catch(IllegalArgumentException e) { continue; }
 	}
 
 	@Override
-	public void lajitteleSoittolista(String ord) throws IllegalArgumentException {
+	public void lajitteleKirjasto(String ord) throws IllegalArgumentException {
 		
-		int ordn;
-		if (ord.equals("laskeva")) ordn = -1;
-		else if (ord.equals("nouseva")) ordn = 1;
-		else throw new IllegalArgumentException();
-		
-		int lenD = this.soittolista.koko();
-		int j = 0;
+		int ordn, len = this.kirjasto.koko();
 		Object tmp = null;
-		for(int i = 0; i < lenD; i++) {
-			j = i;
-			for(int k = i; k < lenD; k++)
-				if (((Media)this.kirjasto.alkio(j)).compareTo((Media)this.kirjasto.alkio(k)) == ordn)
-					j = k;
+
+		/** Tutkitaan parametria, otetaan arvo ulos ja jos virheellinen parametri, heitetään poikkeus */
+		if (ord.trim().equalsIgnoreCase("laskeva"))      ordn = -1;
+		else if (ord.trim().equalsIgnoreCase("nouseva")) ordn =  1;
+		else throw new IllegalArgumentException("Arvon tulee olla joko 'nouseva' tai 'laskeva'");
+
+		/** Läpikäydään alkiot */
+		for(int i = 0, j = i; i < len; i++) {
+			/** Etsitään seuraavaksi suurin/pienin alkio */
+			for(int k = i; k < len; k++) {
+				Oope2014HT.DEBUG(((Media)this.kirjasto.alkio(j)).toString());
+				Oope2014HT.DEBUG(((Media)this.kirjasto.alkio(k)).toString());
+				Oope2014HT.DEBUG("Vrt: "+((Media)this.kirjasto.alkio(j)).compareTo((Media)this.kirjasto.alkio(k)));
+				if (((Media)this.kirjasto.alkio(j)).compareTo((Media)this.kirjasto.alkio(k)) == ordn) j = k;
+			}
+
+			if (i == j) continue;
+
+			/** Vaihdetaan alkioiden paikkaa jos löydettiin suurempi/pienempi */
 			tmp = this.kirjasto.alkio(i);
 			this.kirjasto.aseta(this.kirjasto.alkio(j), i);
 			this.kirjasto.aseta(tmp, j);

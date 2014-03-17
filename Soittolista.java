@@ -1,6 +1,7 @@
 package mediakirjasto;
 
 /**
+ * Soittolista-luokka, joka periytet‰‰n Lista -luokasta toteutumaan linkitettyn‰ listana
  * 
  * @author Miro Nieminen (leonarven+oope@gmail.com), op 98297
  */

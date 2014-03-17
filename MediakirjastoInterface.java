@@ -31,52 +31,52 @@ public interface MediakirjastoInterface {
 	public abstract void luoSoittolista(int ylaraja) throws IllegalArgumentException;
 
 	/**
-	 * 
-	 * @return
+	 * Tulostetaan kirjaston sisältö datalistana
 	 */
 	public abstract int tulostaKirjasto();
 	
 	/**
-	 * 
-	 * @return
+	 * Tulostetaan soittolistan sisältö datalistana sekä koko
 	 */
 	public abstract int tulostaSoittolista();
 
 	/**
-	 * 
-	 * @param index
-	 * @throws IllegalArgumentException
+	 * Lisätään soittolistalle media kirjastosta indeksillä index
+	 * @param index Median indeksi kirjastossa
+	 * @throws IllegalArgumentException Jos index on virheellinen
 	 */
 	public abstract void lisaaMedia(int index) throws IllegalArgumentException;
 
 	/**
-	 * 
-	 * @param index
-	 * @throws IllegalArgumentException
+	 * Poistetaan media soittolistalta indeksillä index
+	 * @param index Median indeksi soittolistassa
+	 * @throws IllegalArgumentException Jos index on virheellinen
 	 */
 	public abstract void poistaMedia(int index) throws IllegalArgumentException;
 
 	/**
-	 * 
+	 * Täytetään soittolistan tyhjä loppuosa medialla kirjaston alusta
 	 */
 	public abstract void taytaMedialla();
 
 	/**
-	 * 
+	 * Lajitellaan kirjasto
+	 * @param ord "nouseva" tai "laskeva", muulloin heitetään poikkeus
+	 * @throws IllegalArgumentException Jos parametri on virheellinen
 	 */
-	public abstract void lajitteleSoittolista(String ord) throws IllegalArgumentException;
+	public abstract void lajitteleKirjasto(String ord) throws IllegalArgumentException;
 
 	/**
-	 * 
-	 * @param tiedosto
-	 * @throws NullPointerException
+	 * Tallennetaan soittolista tiedostoon
+	 * @param tiedosto Tiedosto, johon halutaan tallentaa
+	 * @throws NullPointerException Jos tiedosto on null
 	 */
 	public abstract void tallennaSoittolista(String tiedosto) throws NullPointerException;
 
 	/**
-	 * 
-	 * @param tiedosto
-	 * @throws NullPointerException
+	 * Tallennetaan kirjasto tiedostoon
+	 * @param tiedosto Tiedosto, johon halutaan tallentaa
+	 * @throws NullPointerException Jos tiedosto on null
 	 */
 	public abstract void tallennaKirjasto(String tiedosto) throws NullPointerException;
 
