@@ -26,7 +26,7 @@ public enum Mediatyyppi {
 	 * @param str etsittävä median arvo
 	 * @return null jos epävalidi parametri, muulloin oikea Mediatyyppi
 	 */
-	public static Mediatyyppi get(String str) {
+	public static Mediatyyppi getMediatyyppi(String str) {
 		Mediatyyppi kohde = null;
 		try {
 			/** Koetetaan muodostaa kohde-muuttujaan Mediatyyppi-enumin arvo */

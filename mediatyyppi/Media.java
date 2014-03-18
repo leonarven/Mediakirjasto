@@ -46,7 +46,7 @@ public abstract class Media implements Comparable<Media>  {
 	 * @param line Datarivi, joka paristaan
 	 * @return Uusi oikean tyyppinen media-luokan perinyt olio
 	 */
-	public static Media parseLine(String line) {
+	public static Media getMedia(String line) {
 		/** Parsitaan rivin kent‰t, erotinmerkkin‰ putkimerkki */
 		String argv[] = line.split("[|]");
 		/** Siistit‰‰bn v‰h‰n kentti‰. Whitespacet pois */
@@ -55,7 +55,7 @@ public abstract class Media implements Comparable<Media>  {
 		}
 
 		/** K‰ytet‰‰n staattista Mediatyyppi-luokan get-metodia selvitt‰m‰‰n mink‰ tyyppinen kyseisen rivin media on */
-		Mediatyyppi tyyppi = Mediatyyppi.get(argv[0]);
+		Mediatyyppi tyyppi = Mediatyyppi.getMediatyyppi(argv[0]);
 
 		/** Tutkitaan kukin mediatyyppi.
 		 * Parsitaan haluttu atribuutti ja syˆtet‰‰n se median rakentajalle nimikkeen kera. */

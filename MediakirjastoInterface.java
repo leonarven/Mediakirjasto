@@ -33,12 +33,12 @@ public interface MediakirjastoInterface {
 	/**
 	 * Tulostetaan kirjaston sisältö datalistana
 	 */
-	public abstract int tulostaKirjasto();
+	public abstract void tulostaKirjasto();
 	
 	/**
 	 * Tulostetaan soittolistan sisältö datalistana sekä koko
 	 */
-	public abstract int tulostaSoittolista();
+	public abstract void tulostaSoittolista();
 
 	/**
 	 * Lisätään soittolistalle media kirjastosta indeksillä index

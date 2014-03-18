@@ -32,6 +32,8 @@ public class Oope2014HT {
 	
 	public static void main(String ... args) {
 		
+		testListaLajittelu();
+		
 		System.out.println("***************");
 		System.out.println("* SOITTOLISTA *");
 		System.out.println("***************");
@@ -124,5 +126,23 @@ public class Oope2014HT {
 		}
 		
 		return cmd;
+	}
+	
+	public static void testListaLajittelu() {
+
+		Lista l = new Lista();
+		
+		l.lisaaAlkuun(new mediakirjasto.mediatyyppi.Kuva("Aasdas", true));
+		l.lisaaAlkuun(new mediakirjasto.mediatyyppi.Kuva("Aasdad", true));
+		l.lisaaAlkuun(new mediakirjasto.mediatyyppi.Kuva("Gasdasda", true));
+		l.lisaaAlkuun(new mediakirjasto.mediatyyppi.Kuva("Tasdasd", true));
+
+		l.tulosta();
+
+		l.lajittele(1);
+
+		l.tulosta();
+		
+		System.exit(0);
 	}
 }
