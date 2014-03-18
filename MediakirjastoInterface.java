@@ -36,7 +36,7 @@ public interface MediakirjastoInterface {
 	public abstract void tulostaKirjasto();
 	
 	/**
-	 * Tulostetaan soittolistan sisältö datalistana sekä koko
+	 * Tulostetaan soittolistan sisältö datalistana sekä soittolistan koko ja yläraja
 	 */
 	public abstract void tulostaSoittolista();
 
@@ -56,6 +56,11 @@ public interface MediakirjastoInterface {
 
 	/**
 	 * Täytetään soittolistan tyhjä loppuosa medialla kirjaston alusta
+	 * <p>
+	 * Toimintaperiaate:<br>
+	 * Läpikäydään kukin kirjaston alkio alusta lähtien ja yritetään lisätä soittolistalle.<br>
+	 * Virhetilanteita syntyy kun soittolista on täynnä tai alkio on jo listalla.<br>
+	 * Nämä virheet ohitetaan.
 	 */
 	public abstract void taytaMedialla();
 
@@ -71,13 +76,13 @@ public interface MediakirjastoInterface {
 	 * @param tiedosto Tiedosto, johon halutaan tallentaa
 	 * @throws NullPointerException Jos tiedosto on null
 	 */
-	public abstract void tallennaSoittolista(String tiedosto) throws NullPointerException;
+	public abstract void tallennaSoittolista(String tiedosto) throws NullPointerException, IllegalArgumentException;
 
 	/**
 	 * Tallennetaan kirjasto tiedostoon
 	 * @param tiedosto Tiedosto, johon halutaan tallentaa
 	 * @throws NullPointerException Jos tiedosto on null
 	 */
-	public abstract void tallennaKirjasto(String tiedosto) throws NullPointerException;
+	public abstract void tallennaKirjasto(String tiedosto) throws NullPointerException, IllegalArgumentException;
 
 }

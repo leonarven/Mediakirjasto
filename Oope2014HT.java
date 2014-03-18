@@ -32,7 +32,7 @@ public class Oope2014HT {
 	
 	public static void main(String ... args) {
 		
-		testListaLajittelu();
+		//testListaLajittelu();
 		
 		System.out.println("***************");
 		System.out.println("* SOITTOLISTA *");
@@ -139,7 +139,7 @@ public class Oope2014HT {
 
 		l.tulosta();
 
-		l.lajittele(1);
+		l.lajittele(-1);
 
 		l.tulosta();
 		

@@ -73,16 +73,12 @@ public class Lista extends LinkitettyLista {
 		int j, len = this.koko();
 
 		/** L‰pik‰yd‰‰n alkiot */
-		for(int i = 0; i < len; i++) {
-			j = i;
+		for(int i = len-1; i > 0; i--) {
+			j = 0;
 			/** Etsit‰‰n seuraavaksi suurin/pienin alkio */
-			for(int k = i; k < len; k++) {
+			for(int k = 1; k <= i; k++)
 				/** Vertaillaa Comparable-rajapinnan compareTo-metodilla alkioita */
 				if (((Media)this.alkio(j)).compareTo((Media)this.alkio(k)) == ord) j = k;
-				Oope2014HT.DEBUG(((Media)this.alkio(j)).toString());
-				Oope2014HT.DEBUG(((Media)this.alkio(k)).toString());
-				Oope2014HT.DEBUG("Vrt: "+((Media)this.alkio(j)).compareTo((Media)this.alkio(k)));
-			}
 
 			/** Vaihdetaan alkioiden paikkaa jos lˆydettiin suurempi/pienempi */
 			this.vaihda(i, j);

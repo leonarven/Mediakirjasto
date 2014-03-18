@@ -4,6 +4,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 
 import mediakirjasto.mediatyyppi.Media;
 
@@ -270,8 +271,8 @@ public class Mediakirjasto implements MediakirjastoInterface {
 	public void lajitteleKirjasto(String ord) throws IllegalArgumentException {
 
 		/** Tutkitaan parametria, otetaan vertailun arvo ulos ja jos virheellinen parametri, heitet‰‰n poikkeus */
-		if (ord.trim().equalsIgnoreCase("laskeva"))      this.kirjasto.lajittele(-1);
-		else if (ord.trim().equalsIgnoreCase("nouseva")) this.kirjasto.lajittele( 1);
+		if (ord.trim().equalsIgnoreCase("laskeva"))      this.kirjasto.lajittele(1);
+		else if (ord.trim().equalsIgnoreCase("nouseva")) this.kirjasto.lajittele(-1);
 		else throw new IllegalArgumentException("Arvon tulee olla joko 'nouseva' tai 'laskeva'");
 	}
 
@@ -297,20 +298,76 @@ public class Mediakirjasto implements MediakirjastoInterface {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void tallennaSoittolista(String tiedosto) throws NullPointerException {
+	public void tallennaSoittolista(String tiedosto) throws NullPointerException, IllegalArgumentException {
 		// Tarkistetaan null-Stringien varalta
 		if (tiedosto == null) throw new NullPointerException("Tiedoston nimi tulee m‰‰ritt‰‰");
 
+		/** Alustetaan muuttujat kirjoitin sek‰ tiedosto */
+		PrintWriter out = null;
+		File file = new File(tiedosto);
+
+		/** Try-lause k‰sittelem‰‰n poikkeukset */
+		try {
+			
+			if (Oope2014HT.DEBUG) {
+				Oope2014HT.DEBUG("Aiotaan tallentaa soittolista tiedostoon "+tiedosto);
+				Oope2014HT.DEBUG(String.format("%1$-8s|", this.soittolista.ylaraja()));
+				for(int i = 0; i < this.soittolista.koko(); i++)
+					Oope2014HT.DEBUG(this.soittolista.alkio(i).toString());
+			} else {
+				/** Alustetaan kirjoitin tiedoston perusteella */
+				out = new PrintWriter(file);
+				/** Ensimm‰iselle riville 8-merkkinen sarake jossa soitotlistan koon yl‰raja */
+				out.println(String.format("%1$-8s|", this.soittolista.ylaraja()));
+				/** L‰pik‰yd‰‰n koko soittolista */
+				for(int i = 0; i < this.soittolista.koko(); i++)
+					/** Tulostetaan tiedostoon media-alkio merkkijonomuodossaan */
+					out.println(this.soittolista.alkio(i).toString());
+			} 
+		} /** Jos tiedosto on virheellinen */
+		catch(FileNotFoundException e) {
+			throw new IllegalArgumentException("Virheellinen tiedosto");
+		} /** Lopuksi suljetaan */
+		finally {
+			if (out != null) out.close();
+		}
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void tallennaKirjasto(String tiedosto) throws NullPointerException {
+	public void tallennaKirjasto(String tiedosto) throws NullPointerException, IllegalArgumentException {
 		// Tarkistetaan null-Stringien varalta
 		if (tiedosto == null) throw new NullPointerException("Tiedoston nimi tulee m‰‰ritt‰‰");
 
+		/** Alustetaan muuttujat kirjoitin sek‰ tiedosto */
+		PrintWriter out = null;
+		File file = new File(tiedosto);
+
+		/** Try-lause k‰sittelem‰‰n poikkeukset */
+		try {
+			
+			if (Oope2014HT.DEBUG) {
+				Oope2014HT.DEBUG("Aiotaan tallentaa kirjasto tiedostoon "+tiedosto);
+				for(int i = 0; i < this.kirjasto.koko(); i++)
+					Oope2014HT.DEBUG(this.kirjasto.alkio(i).toString());
+			} else {
+				/** Alustetaan kirjoitin tiedoston perusteella */
+				out = new PrintWriter(file);
+
+				/** L‰pik‰yd‰‰n koko kirjasto */
+				for(int i = 0; i < this.kirjasto.koko(); i++)
+					/** Tulostetaan tiedostoon media-alkio merkkijonomuodossaan */
+					out.println(this.kirjasto.alkio(i).toString());
+			} 
+		} /** Jos tiedosto on virheellinen */
+		catch(FileNotFoundException e) {
+			throw new IllegalArgumentException("Virheellinen tiedosto");
+		} /** Lopuksi suljetaan */
+		finally {
+			if (out != null) out.close();
+		}
 	}
 
 }

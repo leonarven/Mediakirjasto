@@ -1,6 +1,7 @@
 package mediakirjasto.mediatyyppi;
 
 /**
+ * Mahdollinen mediatyyppi
  * 
  * @author Miro Nieminen (leonarven+oope@gmail.com), op 98297
  */

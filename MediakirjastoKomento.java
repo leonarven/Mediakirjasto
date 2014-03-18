@@ -1,6 +1,7 @@
 package mediakirjasto;
 
 /**
+ * Enum kaikista mediakirjaston mahdollisista komennoista
  * 
  * @author Miro Nieminen (leonarven+oope@gmail.com), op 98297
  */
@@ -41,7 +42,7 @@ public enum MediakirjastoKomento {
 	/**
 	 * Enumin rakentaja, parametrinä toteltava komento sekäö tieto vaaditaanko parametreja
 	 * @param komento Toteltava komento
-	 * @param argc Boolen, onko käytössä parametrejä
+	 * @param argc Boolen, vaaditaanko parametrejä
 	 */
 	private MediakirjastoKomento(String komento, boolean argc) {
 		this.komento = komento;
@@ -54,14 +55,17 @@ public enum MediakirjastoKomento {
 	public void argv(String argv) { this.argv = argv; }
 
 	/** Getter argv-attribuutille
+	 * @return Asetettu parametri jos on
 	 */
 	public String argv()          { return this.argv; }
 
-	/** Gatter argc-attribuutille
+	/** Getter argc-attribuutille
+	 * @return Onko parametri vaadittu vai ei
 	 */
 	public boolean argc()         { return this.argc; }
 
 	/** Komento String:ksi
+	 * @return Komento
 	 */
 	public String toString()      { return this.komento; }
 	

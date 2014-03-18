@@ -61,7 +61,7 @@ public abstract class Media implements Comparable<Media>  {
 		 * Parsitaan haluttu atribuutti ja syˆtet‰‰n se median rakentajalle nimikkeen kera. */
 		switch(tyyppi) {
 			case AANI:  return new  Aani(argv[1], Integer.parseInt(argv[2])); /** Attribuuttina kesto, muutetaan String Integerill‰ intiksi */
-			case VIDEO: return new Video(argv[1], Video.Genre.valueOf(argv[2].toUpperCase())); /** Attribuuttina genre, selvitet‰‰n oikea genre Video.Genre-enumin valueOf-metodilla */
+			case VIDEO: return new Video(argv[1], VideoGenre.valueOf(argv[2].toUpperCase())); /** Attribuuttina genre, selvitet‰‰n oikea genre Video.Genre-enumin valueOf-metodilla */
 			case KUVA:  return new  Kuva(argv[1], argv[2].equalsIgnoreCase("true")?true:false); /** Atribuuttina onko bittikartta vai ei; ehtolauseella tarkastetaan onko arvo "true" */
 		}
 		
@@ -75,7 +75,7 @@ public abstract class Media implements Comparable<Media>  {
 	 */
 	@Override public int compareTo(Media toinen) {
 		/** K‰ytet‰‰n String-luokan compareTo-metodia vertailemaan nimikkeit‰ */
-		int ordn = this.nimike().compareTo(toinen.nimike());
+		int ordn = this.nimike().toLowerCase().compareTo(toinen.nimike().toLowerCase());
 		return ordn == 0 ? 0 : (ordn < 0 ? -1 : 1);
 	}
 }
